@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "subscription_benefits",
+  "info": {
+    "singularName": "subscription-benefit",
+    "pluralName": "subscription-benefits",
+    "displayName": "Subscription Benefit"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    }
+  }
+}

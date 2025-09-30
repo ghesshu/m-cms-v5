@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "subscriptions",
+  "info": {
+    "singularName": "subscription",
+    "pluralName": "subscriptions",
+    "displayName": "Subscription"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "stripeProductId": {
+      "type": "string"
+    },
+    "subscriptionType": {
+      "type": "enumeration",
+      "enum": [
+        "Silver",
+        "Gold",
+        "Platinum"
+      ]
+    },
+    "subscription_benefits": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::subscription-benefit.subscription-benefit"
+    }
+  }
+}

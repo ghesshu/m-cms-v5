@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vehicle_brands",
+  "info": {
+    "singularName": "vehicle-brand",
+    "pluralName": "vehicle-brands",
+    "displayName": "Vehicle Brand"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

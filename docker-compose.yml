@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  strapi:
+    build: .
+    container_name: strapi-app
+    restart: unless-stopped
+    ports:
+      - "1337:1337"
+    environment:
+      # Server Configuration
+      HOST: 0.0.0.0
+      PORT: 1337
+      
+      # Security Keys
+      APP_KEYS: ${APP_KEYS:-"toBeModified1,toBeModified2"}
+      API_TOKEN_SALT: ${API_TOKEN_SALT:-tobemodified}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET:-tobemodified}
+      TRANSFER_TOKEN_SALT: ${TRANSFER_TOKEN_SALT:-tobemodified}
+      JWT_SECRET: ${JWT_SECRET:-tobemodified}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY:-tobemodified}
+      
+      # Database Configuration (External Database)
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: ${DATABASE_HOST:-localhost}
+      DATABASE_PORT: ${DATABASE_PORT:-5432}
+      DATABASE_NAME: ${DATABASE_NAME:-strapi}
+      DATABASE_USERNAME: ${DATABASE_USERNAME:-strapi}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:-strapi}
+      DATABASE_SSL: ${DATABASE_SSL:-false}
+      DATABASE_SCHEMA: ${DATABASE_SCHEMA:-public}
+      
+      # Optional Database Pool Configuration
+      DATABASE_POOL_MIN: ${DATABASE_POOL_MIN:-2}
+      DATABASE_POOL_MAX: ${DATABASE_POOL_MAX:-10}
+      
+      # Optional: Database URL (alternative to individual DB settings)
+      # DATABASE_URL: ${DATABASE_URL}
+      
+      # Optional SSL Configuration
+      # DATABASE_SSL_KEY: ${DATABASE_SSL_KEY}
+      # DATABASE_SSL_CERT: ${DATABASE_SSL_CERT}
+      # DATABASE_SSL_CA: ${DATABASE_SSL_CA}
+      # DATABASE_SSL_CAPATH: ${DATABASE_SSL_CAPATH}
+      # DATABASE_SSL_CIPHER: ${DATABASE_SSL_CIPHER}
+      # DATABASE_SSL_REJECT_UNAUTHORIZED: ${DATABASE_SSL_REJECT_UNAUTHORIZED:-true}
+    volumes:
+      # Optional: Mount uploads directory for persistent file storage
+      - strapi_uploads:/app/examples/empty/public/uploads
+    networks:
+      - strapi-network
+
+volumes:
+  strapi_uploads:
+
+networks:
+  strapi-network:
+    driver: bridge

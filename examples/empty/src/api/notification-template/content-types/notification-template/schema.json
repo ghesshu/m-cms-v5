@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "notification_templates",
+  "info": {
+    "singularName": "notification-template",
+    "pluralName": "notification-templates",
+    "displayName": "Notification Template"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "subject": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "PasswordResetEmail",
+        "NewRequestReceivedEmail",
+        "NewRequestReceivedNotification",
+        "QuoteAcceptedEmail",
+        "QuoteAcceptedNotification",
+        "EmailVerificationOtpEmail"
+      ]
+    },
+    "bodyHtml": {
+      "type": "text"
+    }
+  }
+}
