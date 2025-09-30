@@ -4,26 +4,16 @@ FROM node:20-alpine
 # Set working directory
 WORKDIR /app
 
-# Enable Yarn
-RUN corepack enable
+# Install system dependencies and enable Yarn
+RUN apk add --no-cache libc6-compat && \
+    corepack enable && \
+    corepack prepare yarn@stable --activate
 
-# Copy package.json files first for better Docker layer caching
-COPY package.json yarn.lock .yarnrc.yml ./
-COPY .yarn ./.yarn
-
-# Copy workspace package.json files
-COPY packages/*/package.json ./packages/*/
-COPY packages/*/*/package.json ./packages/*/*/
-COPY examples/*/package.json ./examples/*/
-COPY examples/plugins/*/package.json ./examples/plugins/*/
-COPY .github/actions/*/package.json ./.github/actions/*/
-COPY scripts/*/package.json ./scripts/*/
+# Copy all files (simpler approach for monorepo)
+COPY . .
 
 # Install dependencies
-RUN yarn install 
-
-# Copy the rest of the application
-COPY . .
+RUN yarn install --immutable
 
 # Run setup (yarn && yarn clean && yarn build --skip-nx-cache)
 RUN yarn setup
